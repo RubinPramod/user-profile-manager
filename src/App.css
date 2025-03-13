@@ -1,47 +1,6 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-
 /* Global Styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family:  Roboto, sans-serif;
   background-color: #f8f9fa;
   margin: 0;
   padding: 0;
@@ -51,17 +10,19 @@ body {
   padding: 20px;
 }
 
+.semi-bold { 
+  font-weight: 700 
+}
+
 /* User Card Styling */
 .card {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  border-radius: 5px;
   overflow: hidden;
   transition: transform 0.2s;
 }
 
-.card:hover {
-  transform: scale(1.05);
-}
+
 
 .card-img-top {
   width: 100%;
@@ -71,7 +32,6 @@ body {
 }
 
 .card-body {
-  text-align: center;
 }
 
 .card-title {
@@ -84,6 +44,19 @@ body {
   color: #6c757d;
 }
 
+.card-img-top{ 
+  background-color: #f0f0f0
+}
+.heart-filled{
+  fill: red;
+  stroke:red ;
+}
+
+.divider { 
+  width: 1px;
+  height: 20px;
+  background-color: #ccc
+}
 /* Button Styling */
 .btn {
   cursor: pointer;
@@ -101,9 +74,3 @@ body {
   cursor: pointer;
 }
 
-/* Loading Indicator */
-.spinner-border {
-  width: 3rem;
-  height: 3rem;
-  color: #007bff;
-}

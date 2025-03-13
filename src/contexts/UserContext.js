@@ -6,14 +6,12 @@ export const UserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
 
   const updateUser = (updatedUser) => {
-    console.log("updateUser", updatedUser);
     setUsers((prevUsers) =>
       prevUsers.map((user) => (user.id === updatedUser.id ? updatedUser : user))
     );
   };
 
   const deleteUser = (userId) => {
-    console.log("delete");
     setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
   };
 

@@ -11,7 +11,7 @@ const ConfirmationPopup = ({ show, onHide, onConfirm, message }) => {
         <p>{message}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>No</Button>
+        <Button variant="light" onClick={onHide}>No</Button>
         <Button variant="primary" onClick={onConfirm}>Yes</Button>
       </Modal.Footer>
     </Modal>

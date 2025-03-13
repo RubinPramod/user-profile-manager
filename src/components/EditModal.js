@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { UserContext } from '../contexts/UserContext';
+import { regexPatterns, errorMessages } from '../utils/constants';
+import './styles/EditModal.css';
 
 const EditModal = ({ user, onClose }) => {
   const { updateUser } = useContext(UserContext);
@@ -23,13 +25,13 @@ const EditModal = ({ user, onClose }) => {
   const validateField = (name, value) => {
     let error = '';
     if (!value) {
-      error = `${name.charAt(0).toUpperCase() + name.slice(1)} is required`;
+      error = errorMessages.required(name);
     } else {
-      if (name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
-        error = 'Email is invalid';
+      if (name === 'email' && !regexPatterns.email.test(value)) {
+        error = errorMessages.emailInvalid;
       }
-      if (name === 'website' && !/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) {
-        error = 'Website URL is invalid';
+      if (name === 'website' && !regexPatterns.website.test(value)) {
+        error = errorMessages.websiteInvalid;
       }
     }
     setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
@@ -37,12 +39,12 @@ const EditModal = ({ user, onClose }) => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = 'Name is required';
-    if (!formData.email) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
-    if (!formData.phone) newErrors.phone = 'Phone number is required';
-    if (!formData.website) newErrors.website = 'Website is required';
-    else if (!/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.website)) newErrors.website = 'Website URL is invalid';
+    if (!formData.name) newErrors.name = errorMessages.required('name');
+    if (!formData.email) newErrors.email = errorMessages.required('email');
+    else if (!regexPatterns.email.test(formData.email)) newErrors.email = errorMessages.emailInvalid;
+    if (!formData.phone) newErrors.phone = errorMessages.required('phone');
+    if (!formData.website) newErrors.website = errorMessages.required('website');
+    else if (!regexPatterns.website.test(formData.website)) newErrors.website = errorMessages.websiteInvalid;
     return newErrors;
   };
 
@@ -64,58 +66,70 @@ const EditModal = ({ user, onClose }) => {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Label><span style={{ color: 'red' }}>*</span> Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              isInvalid={!!errors.name}
-            />
-            <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
+          <Form.Group className="mb-4 d-flex align-items-center">
+            <Form.Label className="me-2 label"><span className='text-danger'>*</span> Name</Form.Label>
+            <div className="flex-grow-1">
+              <Form.Control
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                isInvalid={!!errors.name}
+                className="w-100"
+              />
+              {errors.name && <div className="error-message">{errors.name}</div>}
+            </div>
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label><span style={{ color: 'red' }}>*</span> Email</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              isInvalid={!!errors.email}
-            />
-            <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
+          <Form.Group className="mb-4 d-flex align-items-center">
+            <Form.Label className="me-2 label"><span className='text-danger'>*</span> Email</Form.Label>
+            <div className="flex-grow-1">
+              <Form.Control
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                isInvalid={!!errors.email}
+                className="w-100"
+              />
+              {errors.email && <div className="error-message">{errors.email}</div>}
+            </div>
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label><span style={{ color: 'red' }}>*</span> Phone</Form.Label>
-            <Form.Control
-              type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              isInvalid={!!errors.phone}
-            />
-            <Form.Control.Feedback type="invalid">{errors.phone}</Form.Control.Feedback>
+          <Form.Group className="mb-4 d-flex align-items-center">
+            <Form.Label className="me-2 label"><span className='text-danger'>*</span> Phone</Form.Label>
+            <div className="flex-grow-1">
+              <Form.Control
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                isInvalid={!!errors.phone}
+                className="w-100"
+              />
+              {errors.phone && <div className="error-message">{errors.phone}</div>}
+            </div>
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label><span style={{ color: 'red' }}>*</span> Website</Form.Label>
-            <Form.Control
-              type="text"
-              name="website"
-              value={formData.website}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              isInvalid={!!errors.website}
-            />
-            <Form.Control.Feedback type="invalid">{errors.website}</Form.Control.Feedback>
+          <Form.Group className="mb-4 d-flex align-items-center">
+            <Form.Label className="me-2 label"><span className='text-danger'>*</span> Website</Form.Label>
+            <div className="flex-grow-1">
+              <Form.Control
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                isInvalid={!!errors.website}
+                className="w-100"
+              />
+              {errors.website && <div className="error-message">{errors.website}</div>}
+            </div>
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>Cancel</Button>
+        <Button variant="light" onClick={onClose}>Cancel</Button>
         <Button variant="primary" onClick={handleSubmit}>OK</Button>
       </Modal.Footer>
     </Modal>
