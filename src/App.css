@@ -36,3 +36,74 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+}
+
+/* User Card Styling */
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background-color: #e9ecef;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Button Styling */
+.btn {
+  cursor: pointer;
+}
+
+.btn-outline-danger {
+  border: 1px solid red;
+}
+
+.btn-outline-danger:hover {
+  background-color: red;
+  color: white;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Loading Indicator */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: #007bff;
+}
